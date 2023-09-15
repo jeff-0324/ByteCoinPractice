@@ -8,26 +8,22 @@
 import Foundation
 
 protocol CoinManagerDelegate {
-    func didUpdateCoin(_ coinManager : CoinManager, coin : CoinValue)
+    func didUpdateCoin(price : String, currency : String)
     func didFailWithError(error: Error)
 }
 
+
 struct CoinManager {
     
-    let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC/USD"
+    let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
     let apiKey = "apikey=1D05E12E-8263-4308-A976-F76AA00D6D1E"
-    
-    
     let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     
     var delegate : CoinManagerDelegate?
     
     func getCoinPrice(for currency: String) {
-        let urlString = "\(baseURL)?\(apiKey)"
-        self.performRequest(urlString: urlString)
-    }
-    
-    func performRequest(urlString : String) {
+        
+        let urlString = "\(baseURL)/\(currency)?\(apiKey)"
         //input으로 받은 url
         if let url = URL(string: urlString){
             //session을 생성하는데 기본 브라우저와 같은 설정
@@ -38,43 +34,28 @@ struct CoinManager {
                     print(error!)
                     return
                 }
+                
                 if let safeData = data {
-                    self.parseJSON(coinData: safeData)
+                    if let bitcoinPrice = self.parseJSON(safeData) {
+                        let priceString = String(format: "%.2f", bitcoinPrice)
+                        self.delegate?.didUpdateCoin(price: priceString, currency: currency)
+                    }
                 }
             }
            
                 task.resume()
             }
         }
-    func parseJSON(coinData : Data) {
+    
+    func parseJSON(_ data : Data) -> Double? {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(CoinData.self, from: coinData)
-            print(decodedData.rate)
+            let decodedData = try decoder.decode(CoinData.self, from: data)
+            let price = decodedData.rate
+            return price
         } catch {
             print(error)
+            return nil
         }
     }
 }
-   
-
-  
-    
-//    func parseJson(_: _ ) {
-//        
-//    }
-    
-    
-
-
-
-//            let task = session.dataTask(with: url) {(data, response, error) in
-//                if error != nil {
-//                    delegate?.didFailWithError(error: error!)
-//                    return
-//                }
-//                if let safeData = data {
-//                    if let rate = self.parseJson(safeData) {
-//                        self.delegate?.didUpdateCoin(self, coin: rate)
-//                    }
-//                }

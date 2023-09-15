@@ -7,7 +7,31 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CoinManagerDelegate{
+
+    @IBOutlet weak var bitcoinLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var currencyPicker: UIPickerView!
+    var coinManager = CoinManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        coinManager.delegate = self
+        currencyPicker.dataSource = self
+        currencyPicker.delegate = self
+    }
+
+    func didUpdateCoin(price : String, currency : String) {
+        DispatchQueue.main.sync {
+            self.bitcoinLabel.text = price
+            self.currencyLabel.text = currency
+        }
+    }
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
     // pickerview의 선택하는 라인 갯수
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -26,20 +50,5 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         coinManager.getCoinPrice(for: selectedCurrency)
     }
     
-
-    @IBOutlet weak var bitcoinLabel: UILabel!
-    @IBOutlet weak var currencyLabel: UILabel!
-    @IBOutlet weak var currencyPicker: UIPickerView!
-    let coinManager = CoinManager()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        currencyPicker.dataSource = self
-        currencyPicker.delegate = self
-    }
-
-
 }
 

@@ -14,7 +14,6 @@
 		F95998F82AB0155F003F48DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95998F72AB0155F003F48DD /* Assets.xcassets */; };
 		F95998FB2AB0155F003F48DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95998F92AB0155F003F48DD /* LaunchScreen.storyboard */; };
 		F95999042AB086BE003F48DD /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95999032AB086BE003F48DD /* CoinManager.swift */; };
-		F95999062AB17194003F48DD /* CoinValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95999052AB17194003F48DD /* CoinValue.swift */; };
 		F959990A2AB17350003F48DD /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95999092AB17350003F48DD /* CoinData.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +27,6 @@
 		F95998FA2AB0155F003F48DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F95998FC2AB0155F003F48DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F95999032AB086BE003F48DD /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
-		F95999052AB17194003F48DD /* CoinValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinValue.swift; sourceTree = "<group>"; };
 		F95999092AB17350003F48DD /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +75,6 @@
 		F95999022AB086AC003F48DD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F95999052AB17194003F48DD /* CoinValue.swift */,
 				F95999092AB17350003F48DD /* CoinData.swift */,
 				F95999032AB086BE003F48DD /* CoinManager.swift */,
 			);
@@ -176,7 +173,6 @@
 				F95998F32AB0155E003F48DD /* ViewController.swift in Sources */,
 				F95998EF2AB0155E003F48DD /* AppDelegate.swift in Sources */,
 				F95998F12AB0155E003F48DD /* SceneDelegate.swift in Sources */,
-				F95999062AB17194003F48DD /* CoinValue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
